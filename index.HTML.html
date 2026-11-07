@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>睡不著？先找到原因，再找方法</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#23262f;--sub:#6a6f7c;--line:#e3e0d8;--acc:#3d4f7c;--accbg:#e8ecf6;--warn:#fff4e0;--warnink:#7a4b00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161d;--card:#1e222c;--ink:#e9eaf0;--sub:#9aa0b0;--line:#30354a;--acc:#9db4f0;--accbg:#262c40;--warn:#3a2c12;--warnink:#f0cf8a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14161d;--card:#1e222c;--ink:#e9eaf0;--sub:#9aa0b0;--line:#30354a;--acc:#9db4f0;--accbg:#262c40;--warn:#3a2c12;--warnink:#f0cf8a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.75;font-size:16px}
+main{max-width:560px;margin:0 auto;padding:28px 20px 48px}
+.screen{display:none;animation:in .35s ease}
+.screen.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.moon{font-size:44px;line-height:1}
+h1{font-size:26px;line-height:1.4;margin:14px 0 10px}
+h2{font-size:22px;line-height:1.4;margin:6px 0 6px}
+p{margin:0 0 14px}
+.sub{color:var(--sub);font-size:15px}
+.btn{display:inline-block;background:var(--acc);color:var(--bg);border:0;border-radius:12px;padding:13px 26px;font:inherit;font-weight:600;cursor:pointer;margin-top:8px}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.step{font-size:13px;color:var(--sub);letter-spacing:.08em;margin-bottom:6px}
+.opts{display:grid;gap:12px;margin-top:18px}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;width:100%;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:16px;font:inherit;cursor:pointer;transition:.15s}
+.opt:hover,.opt:focus-visible{border-color:var(--acc);background:var(--accbg);outline:none}
+.opt .ic{font-size:28px}
+.tips{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px;counter-reset:t}
+.tip{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px 56px;position:relative;counter-increment:t}
+.tip::before{content:counter(t);position:absolute;left:16px;top:16px;width:28px;height:28px;border-radius:50%;background:var(--accbg);color:var(--acc);font-weight:700;display:flex;align-items:center;justify-content:center}
+.tip b{display:block;margin-bottom:2px}
+.tip p{margin:0 0 6px;font-size:15px}
+.src{font-size:12.5px;color:var(--sub)}
+.note{background:var(--warn);color:var(--warnink);border-radius:12px;padding:12px 14px;font-size:14px;margin-top:18px}
+.foot{font-size:12.5px;color:var(--sub);margin-top:22px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.opt.sel{border-color:var(--acc);background:var(--accbg)}
+.opt .ck{margin-left:auto;font-size:20px;color:var(--acc);visibility:hidden}
+.opt.sel .ck{visibility:visible}
+.subs{display:none;flex-wrap:wrap;gap:8px;margin:-4px 0 4px 8px;padding:12px;border-left:3px solid var(--acc)}
+.subs.on{display:flex}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14.5px;cursor:pointer}
+.chip.sel{border-color:var(--acc);background:var(--accbg);color:var(--acc);font-weight:600}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.sec{margin-top:30px;padding-top:6px;border-top:2px solid var(--line)}
+#res .sec:first-child{border-top:0;margin-top:14px}
+.hint{font-size:13.5px;color:var(--sub);margin-top:10px;min-height:1.5em}
+a{color:var(--acc)}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 16px;margin-top:12px}
+summary{cursor:pointer;font-weight:600;padding:12px 0}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:10px}
+details ul,details ol{margin:0 0 12px;padding-left:20px;font-size:15px}
+details li{margin-bottom:8px}
+.tr{display:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;margin:-4px 0 4px}
+.tr.on{display:block}
+.tr p{margin:0 0 8px}
+</style>
+</head>
+<body>
+<main>
+
+<section class="screen on" id="s0">
+  <div class="moon">🌙</div>
+  <h1>睡不著？先找到原因，再找方法</h1>
+  <p>失眠的樣子不只一種：有人是腦袋停不下來，有人是心跳很清楚，有人是肚子不舒服，也有人是作息被打亂了。</p>
+  <p>這個小工具分四步：先看看你的睡不好屬於哪一種表現，再選出可能的原因，接著看針對原因的做法，最後補上睡眠基本功與放鬆方式。</p>
+  <p class="sub">約 3 分鐘，不需要輸入任何個人資料。</p>
+  <button class="btn" onclick="go('sT')">開始</button>
+  <p class="foot">本頁為衛教資訊，無法取代醫師診療。</p>
+</section>
+
+<section class="screen" id="sT">
+  <div class="step">第 1 步 ／ 共 4 步</div>
+  <h2>你的「睡不好」是哪一種表現？</h2>
+  <p class="sub">點開看看可能的原因。症狀分類只是入口，不是診斷結論。</p>
+  <div class="opts" id="tr"></div>
+  <p class="hint">其他常見影響因素：環境（噪音、光線、溫度），以及生活與藥物（咖啡因、酒精、藥物、白天活動不足）。</p>
+  <div class="row"><button class="btn ghost" onclick="go('s0')">返回</button><button class="btn" onclick="go('s1')">下一步：選擇可能原因</button></div>
+</section>
+
+<section class="screen" id="s1">
+  <div class="step">第 2 步 ／ 共 4 步</div>
+  <h2>你現在的睡不著，比較像哪一種？</h2>
+  <p class="sub">可以多選，把符合你的狀況都勾起來。</p>
+  <div class="opts" id="opts"></div>
+  <p class="hint" id="hint"></p>
+  <div class="row"><button class="btn ghost" onclick="go('sT')">返回</button><button class="btn" id="goBtn" disabled onclick="showAll()">看建議</button></div>
+</section>
+
+<section class="screen" id="s2">
+  <div class="step">第 3 步 ／ 共 4 步</div>
+  <h2>為你整理的建議</h2>
+  <p class="sub" id="picked"></p>
+  <div id="res"></div>
+  <div class="row"><button class="btn ghost" onclick="go('s1')">調整我的選項</button><button class="btn" onclick="go('s3')">下一頁：基本功與穴位</button></div>
+  <p class="foot">若失眠每週出現 3 晚以上、持續超過 3 個月，或已影響白天的工作與情緒，建議就醫評估。</p>
+</section>
+
+<section class="screen" id="s3">
+  <div class="step">第 4 步 ／ 共 4 步</div>
+  <h2>睡眠基本功與放鬆方式</h2>
+  <p class="sub" id="s3intro"></p>
+
+  <details data-for="mind late light"><summary>💡 光線：白天亮、晚上暗</summary>
+  <ul>
+  <li>太陽下山後，眼睛看到昏暗的光線，身體會開始分泌退黑激素，讓你慢慢有睡意、放鬆下來。</li>
+  <li>睡前至少 1 小時不要用手機、平板等 3C 產品，也不要把它們帶進臥室。</li>
+  <li><b>年輕人晚睡晚起、想調整：</b>早上起床先照光 10 分鐘，再沖澡或洗臉讓身體醒過來，也可以搭配運動。</li>
+  <li><b>長輩早睡早起、想調整：</b>黃昏時到戶外照光、散步，安排一些小活動，避免吃飽就睡。</li>
+  <li>小提醒：這有時只是正常的生理變化，不一定是病。</li>
+  </ul></details>
+
+  <details data-for="heart mind light"><summary>🌡️ 體溫：讓核心體溫順利下降</summary>
+  <ul>
+  <li>晚上睡覺時，身體內部的溫度（中樞體溫）會慢慢下降，這是正常的生理變化。</li>
+  <li><b>洗澡：</b>洗完澡身體內部溫度會先上升，馬上躺下反而睡不著。建議至少在睡前 90 分鐘洗完，留一段時間讓體溫降下來。</li>
+  <li><b>泡腳：</b>手腳冰冷的人特別適合。泡腳會讓手腳變暖，身體內部的熱比較容易散掉。水溫約 40°C，大約泡 15 分鐘就好。</li>
+  </ul></details>
+
+  <details data-for="heart mind late dream period belly light"><summary>☕ 咖啡因：過午不喝</summary>
+  <ul>
+  <li>咖啡因可以提神，但也會影響睡眠，影響時間可長達 10 小時。（茶、可樂、能量飲料也含咖啡因。）</li>
+  <li>所以睡不好的人，建議中午之後別再喝咖啡。</li>
+  </ul></details>
+
+  <details data-for="late dream period light"><summary>⏰ 作息：別讓節律跑掉</summary>
+  <ul>
+  <li>睡眠債很難完全補回來。放假時，起床和入睡的時間也盡量和平常差不超過 30～60 分鐘。</li>
+  <li>早睡比晚睡更困難。想把睡覺時間往前調：先固定每天的起床時間，再每週嘗試提早 10 分鐘上床。可以參考<a href="https://www.facebook.com/share/p/1cdjaBWSXG/" target="_blank" rel="noopener">這篇圖文說明</a>。</li>
+  <li>輪班工作者的作息比較難固定，可以和醫師討論是否適合用藥物輔助。</li>
+  </ul></details>
+
+  <details><summary>🧘 睡前儀式與放鬆</summary>
+  <ul>
+  <li>建立固定的睡前流程，如調暗燈光、洗漱、輕柔伸展，讓身體知道快睡了。</li>
+  <li>睡前 5～10 分鐘做溫和的拉伸、腹式呼吸或冥想（身體掃描、正念）。</li>
+  <li>床只拿來睡覺：不在床上滑手機、看書，想睡了才上床。</li>
+  </ul></details>
+
+  <details><summary>📍 依你選的狀況，常用的穴位</summary>
+  <p class="sub" id="acuWhy"></p>
+  <ul>
+  <li data-g="1"><b>補氣養血、清心開竅：</b>三陰交、神門、百會、四神聰</li>
+  <li data-g="2"><b>養心安神、益氣生血：</b>神門、內關、足三里、三陰交</li>
+  <li data-g="3"><b>調和陰陽、交通心腎：</b>神門、內關、三陰交、太谿</li>
+  <li data-g="4"><b>健脾化痰、清利神志：</b>豐隆、神門、內關、足三里</li>
+  </ul>
+  <p class="sub" id="acuLoc"><b>位置速查：</b>神門＝手腕橫紋小指側的凹陷；內關＝腕橫紋上約三指寬、兩條筋之間；三陰交＝內踝尖上約四指寬、脛骨後緣；足三里＝膝眼下約四指寬、脛骨外側一指；太谿＝內踝與腳跟筋之間的凹陷；百會＝頭頂正中；四神聰＝百會前後左右各約一個拇指寬；豐隆＝膝蓋與外踝連線中點、脛骨外側約兩指。每穴按揉 1～2 分鐘，以微酸脹但不痛為度。</p>
+  <div class="src">此為您勾選的狀況做的對應僅供參考，不等於辨證。不確定哪一組適合自己，請中醫師評估。孕婦請避免按壓三陰交。</div>
+  <p></p></details>
+
+  <div class="row"><button class="btn ghost" onclick="go('s2')">回到我的建議</button><button class="btn" onclick="go('s0')">重新開始</button></div>
+  <p class="foot">本頁為衛教資訊，無法取代醫師診療。若失眠每週 3 晚以上、持續超過 3 個月，或已影響白天功能，請就醫評估。</p>
+</section>
+</main>
+<script>
+var D={
+mind:{ic:"💭",label:"腦子裡很多想法",title:"腦子停不下來",desc:"身體累了，但思緒還在開會。重點是把想法「放下」，而不是逼自己不要想。",
+tips:[
+{t:"睡前 5 分鐘，把明天要做的事寫下來",d:"列成待辦清單即可，不用寫煩惱的細節。寫完就告訴自己：已經交給明天了。"},
+{t:"躺不著就離開床，睏了再回來",d:"躺了約 20 分鐘仍清醒，就到昏暗處做安靜的事（如翻閱紙本書），避免滑手機。目的是讓「床」和「清醒、焦慮」脫鉤。"},
+{t:"把時鐘轉開，不要一直看時間",d:"越看越算「還能睡幾小時」，焦慮就越高。夜裡只留鬧鐘，不盯時間。"},
+{t:"練習正念：只是觀察，不跟想法打架",d:"注意力放在呼吸或身體的接觸感，想法出現就在心裡標記「我在想事情」，再回到呼吸。"}]},
+heart:{ic:"💓",label:"躺著覺得心跳很快",title:"心跳快、身體靜不下來",desc:"身體處在「警戒模式」時，心跳與呼吸會變快。這幾個做法是幫身體切換到放鬆模式。",
+tips:[
+{t:"慢而長的呼吸：吸 4 秒、吐 6 秒",d:"用鼻吸氣，緩慢吐氣，持續約 5 分鐘。吐氣比吸氣長一點即可，不需要憋氣。"},
+{t:"睡前 1～2 小時泡溫水澡或淋浴",d:"約 40～42.5°C。洗完體溫下降的過程有助入睡。心血管疾病或血壓不穩者，請先詢問醫師。"},
+{t:"咖啡因提早停，也不要用酒精助眠",d:"咖啡因最好在睡前 6 小時以前就結束；酒精可能讓人比較快睡著，但後半夜睡眠會變得片段。"},
+{t:"漸進式肌肉放鬆",d:"由腳到頭，每一組肌肉繃緊約 5 秒再放掉，留意放鬆後的感覺。可以降低身體的緊繃感。"}],
+warn:"若心悸伴隨胸痛、昏厥、呼吸困難，或反覆發作、突然變嚴重，請先就醫檢查，不要只當成失眠處理。"},
+belly:{ic:"🫃",label:"肚子好像怪怪的",title:"肚子不舒服影響睡眠",desc:"脹氣、胃酸逆流或腹部不適，躺平後常常更明顯。可以從進食時間與睡姿著手。",
+tips:[
+{t:"睡前至少 2～3 小時不吃大餐",d:"晚餐盡量提早、份量不要過大，吃完先站著或散步，不要馬上躺下。"},
+{t:"夜間逆流時，試試抬高床頭或左側睡",d:"用床腳墊高或楔形枕抬高上半身（只多墊枕頭效果有限）。左側臥也可能減少夜間逆流。"},
+{t:"記錄並避開自己的誘發食物",d:"連續幾天記下晚上吃了什麼、肚子的反應。常見誘因如咖啡、酒、辛辣、油膩，因人而異。"},
+{t:"腹式呼吸，加上輕柔的腹部溫熱",d:"一手放腹部，吸氣時肚子微微鼓起，吐氣放鬆。溫熱敷可讓腹部感覺舒適。"}],
+warn:"若有反覆腹痛、吞嚥困難、體重不明原因下降、解黑便或血便，請盡快就醫檢查。"},
+nose:{ic:"🤧",label:"鼻塞、鼻涕、打呼",title:"鼻塞、鼻涕或打呼",desc:"鼻道不通會讓人張口呼吸、睡得淺；打呼則可能和上呼吸道變窄有關。",
+tips:[
+{t:"睡前用生理食鹽水沖洗鼻腔",d:"使用市售洗鼻器，搭配無菌或煮沸放涼的水，清掉分泌物與過敏原，鼻子會比較通。"},
+{t:"控制臥室過敏原",d:"寢具定期用熱水清洗、保持通風乾燥、睡前洗澡洗頭，減少鼻黏膜受刺激。"},
+{t:"睡前不喝酒；體重過重者控制體重",d:"酒精會讓上呼吸道肌肉更鬆弛，容易加重打呼；體重變化與睡眠呼吸障礙的嚴重度有關。"},
+{t:"打呼加上呼吸暫停，要做睡眠檢查",d:"若家人看到你睡到一半停止呼吸、喘醒，或白天很嗜睡，不要只當成鼻塞處理。"}],
+warn:"打呼伴隨睡眠中呼吸暫停、晨起頭痛或白天明顯嗜睡，建議到耳鼻喉科或睡眠中心評估。"},
+cough:{ic:"😮‍💨",label:"想咳嗽",title:"夜裡想咳嗽",desc:"一躺平就咳，常和鼻涕倒流、胃酸逆流或氣道敏感有關，先從可能的誘因下手。",
+tips:[
+{t:"留意鼻涕倒流",d:"鼻涕往喉嚨流是常見的夜咳原因，先處理鼻塞鼻涕（例如沖洗鼻腔）。"},
+{t:"上半身墊高，睡前 2～3 小時不進食",d:"若咳嗽在剛躺下或吃完不久後出現，可能與逆流有關，墊高上半身並提早吃晚餐。"},
+{t:"臥室保持適度濕度，避開菸味與塵蟎",d:"空氣太乾或有刺激物，氣道容易敏感。濕度不必過高，以免滋生塵蟎黴菌。"},
+{t:"記錄咳嗽的時間與誘因",d:"是剛躺下就咳、半夜咳還是清晨咳？有沒有伴隨痰、喘鳴？描述得越清楚，醫師越好判斷。"}],
+warn:"咳嗽超過 8 週、咳血、發燒、喘不過氣或體重下降，請就醫檢查。"},
+period:{ic:"🩸",label:"月經不適",title:"月經期間的不適",desc:"經痛或經前身體變化，都可能讓睡眠變差。",
+tips:[
+{t:"下腹部溫熱敷",d:"熱水袋或暖暖包隔著衣物，約 40°C 敷 20～30 分鐘，避免燙傷。"},
+{t:"平日保持規律運動",d:"不是經痛當下才做，而是平常累積，例如快走、瑜伽，每週數次。"},
+{t:"需要止痛時，依指示使用",d:"非類固醇消炎止痛藥可有效緩解經痛，請依藥師或醫師指示；有胃部疾病、氣喘或腎臟問題者先詢問。"},
+{t:"經前一週維持規律作息、午後避開咖啡因",d:"排卵後的黃體期，基礎體溫升高、睡眠品質容易變差（退黑激素也可能較低），所以月經快來前睡不好很常見，不是你做錯了什麼。先把基本功做穩。"}],
+warn:"經痛突然加劇、經血量異常多，或非經期出現下腹痛，建議婦科評估。"},
+itch:{ic:"🪶",label:"癢癢麻麻的",title:"癢、麻或刺刺的感覺",desc:"皮膚癢、手腳麻、腿想動，原因不同，處理方向也不同。",
+tips:[
+{t:"洗澡水別太燙，洗完立刻保濕",d:"熱水會帶走皮脂，讓皮膚更乾更癢。沐浴後三分鐘內擦上乳液或乳霜。"},
+{t:"臥室保持涼爽，穿透氣寬鬆的睡衣",d:"室溫過熱會干擾睡眠，也讓人更想抓癢。"},
+{t:"麻癢在腿、一躺下就想動：留意不寧腿",d:"可能是不寧腿症候群。避免睡前咖啡因與酒精，並請醫師評估鐵蛋白。"},
+{t:"記錄麻癢的部位、時間與誘因",d:"是皮膚表面癢、深部麻，還是單側？運動、姿勢、飲食有沒有影響？"}],
+warn:"單側麻木、無力、說話或視力異常，或麻癢範圍持續擴大，請立即就醫。"},
+dream:{ic:"🌀",label:"常常做很多夢",title:"夢多、睡不沉",desc:"夢本身不一定是問題，但夢多又睡醒很累時，常代表睡眠偏淺或被打斷。",
+tips:[
+{t:"先把睡眠穩定下來",d:"固定起床時間、減少夜間醒來。睡得淺、醒來次數多時，比較容易記得夢。"},
+{t:"睡前不靠酒精，咖啡因提早停",d:"酒精會影響睡眠結構，後半夜容易片段化；咖啡因在睡前 6 小時仍會減少睡眠。"},
+{t:"反覆惡夢：試試意象預演",d:"白天清醒時，把惡夢的結局改寫成你想要的樣子，在腦中預演幾分鐘，每天練習。"},
+{t:"留意是否「演出夢境」",d:"夢中大聲喊叫、揮拳踢腳，甚至弄傷自己或旁人，請安排睡眠評估。"}],
+warn:"惡夢頻繁、與創傷事件有關，或影響白天情緒與功能，建議身心科或睡眠門診評估。"},
+light:{ic:"🔔",label:"很容易醒、淺眠",title:"容易醒、睡得淺",desc:"淺眠常是被某個東西叫醒：環境、夜尿、身體不適，或睡眠本身變淺。先找出「被什麼叫醒」。",
+tips:[
+{t:"先檢查臥室的噪音、光線、溫度",d:"用遮光窗簾或眼罩擋光，耳塞或白噪音降低突發聲響，室溫保持涼爽、通風。"},
+{t:"睡前少喝水，咖啡因與酒精也要避開",d:"睡前 2 小時內少喝水與含咖啡因、酒精的飲料，上床前先上廁所，減少夜尿與後半夜醒來。"},
+{t:"醒來後不看時鐘、不滑手機",d:"不要開亮燈或查看時間。若過了約 20 分鐘還清醒，就到昏暗處做安靜的事，有睏意再回床。"},
+{t:"記錄一週：幾點醒、為什麼醒",d:"例如想上廁所、太熱、疼痛、被吵醒、心悸或打呼。有紀錄，看診時比較容易分流原因。"}],
+warn:"若伴隨打呼、嗆醒或喘醒、夜尿很多、小腿不舒服想動、疼痛或胃酸逆流，或最近新增藥物，建議就醫或與醫師討論。"},
+late:{ic:"🌃",label:"熬夜到現在，好像睡不著了",title:"作息被打亂，睡不著",desc:"長期熬夜會讓生理時鐘往後移，所以該睡的時間反而不睏。目標是慢慢把時鐘拉回來。",
+tips:[
+{t:"每天固定起床時間，先別補眠太久",d:"就算前一晚很晚睡，也盡量在固定時間起床。睡眠債很難一次補回，平時就讓作息差距控制在 30～60 分鐘內。"},
+{t:"早晨曬 30 分鐘以上的明亮光線",d:"起床後盡快到戶外或靠窗，早上的光線有助把生理時鐘往前拉。"},
+{t:"晚上調暗燈光、減少螢幕亮度",d:"睡前 1～2 小時改用暖色、偏暗的燈光，手機調低亮度或收起來。"},
+{t:"每 3～4 天提早 10 分鐘上床",d:"固定起床時間後，若能在 30 分鐘內睡著，就再提早 10 分鐘。調整期間避免午休，要睡不超過 20 分鐘。"}]}
+};
+function go(id){document.querySelectorAll('.screen').forEach(function(e){e.classList.remove('on')});document.getElementById(id).classList.add('on');window.scrollTo(0,0)}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+var GROUPS=[{k:'mind'},{k:'heart'},{k:'body',ic:'🤒',label:'身體不太舒服',subs:['belly','nose','cough','period','itch']},{k:'late'},{k:'dream'},{k:'light'}];
+var box=document.getElementById('opts'),sel={},subSel={};
+function ready(){var any=false,bad=false;GROUPS.forEach(function(g){if(!sel[g.k])return;if(g.subs){var n=g.subs.filter(function(s){return subSel[s]}).length;if(n)any=true;else bad=true}else any=true});return{ok:any&&!bad,bad:bad}}
+function upd(){var r=ready();document.getElementById('goBtn').disabled=!r.ok;document.getElementById('hint').textContent=r.bad?'請在「身體不太舒服」下，再選一個以上的具體狀況。':''}
+GROUPS.forEach(function(g){
+  var d=D[g.k]||g,sb=null;
+  var b=document.createElement('button');b.className='opt';b.setAttribute('aria-pressed','false');
+  b.innerHTML='<span class="ic">'+d.ic+'</span><span>'+esc(d.label)+'</span><span class="ck">✓</span>';
+  box.appendChild(b);
+  if(g.subs){sb=document.createElement('div');sb.className='subs';
+    g.subs.forEach(function(s){var c=document.createElement('button');c.className='chip';c.textContent=D[s].label;
+      c.onclick=function(){subSel[s]=!subSel[s];c.classList.toggle('sel',!!subSel[s]);upd()};sb.appendChild(c)});
+    box.appendChild(sb)}
+  b.onclick=function(){sel[g.k]=!sel[g.k];b.classList.toggle('sel',!!sel[g.k]);b.setAttribute('aria-pressed',String(!!sel[g.k]));if(sb)sb.classList.toggle('on',!!sel[g.k]);upd()};
+});
+function sec(k){var d=D[k];
+  return '<div class="sec"><h2>'+d.ic+' '+esc(d.title)+'</h2><p class="sub">'+esc(d.desc)+'</p><ol class="tips">'+d.tips.map(function(x){
+    return '<li class="tip"><b>'+esc(x.t)+'</b><p>'+esc(x.d)+'</p></li>'}).join('')+'</ol>'+(d.warn?'<div class="note">⚠️ '+esc(d.warn)+'</div>':'')+'</div>'}
+function showAll(){var h='',names=[],keys=[];
+  GROUPS.forEach(function(g){if(!sel[g.k])return;
+    if(g.subs){g.subs.forEach(function(s){if(subSel[s]){h+=sec(s);names.push(D[s].label);keys.push(s)}})}else{h+=sec(g.k);names.push(D[g.k].label);keys.push(g.k)}});
+  document.getElementById('res').innerHTML=h;
+  document.getElementById('picked').textContent='你選了：'+names.join('、');
+  personalize(keys,names);
+  go('s2');
+}
+var TR=[
+{ic:'🕐',l:'入睡困難',c:'高警覺、緊張焦慮、生理時鐘延後、咖啡因、對床有錯誤連結。',a:'有人一到床上就特別緊張。請讓床只用來睡覺：不在床上滑手機、看書，想睡了才上床。',m:'腦子裡很多想法、躺著覺得心跳很快、熬夜太久睡不著'},
+{ic:'🌙',l:'夜間反覆醒來',c:'睡眠呼吸中止、夜尿、疼痛、胃食道逆流、週期性肢體抽動（PLMS）、藥物或環境（噪音、光線、溫度）。',a:'打呼、嗆醒或喘醒、夜尿很多、腿不舒服想動時，建議就醫評估。',m:'身體不太舒服、很容易醒／淺眠'},
+{ic:'🌅',l:'太早醒來',c:'高齡的生理時鐘前移、憂鬱、睡眠壓力不足（太早上床或白天睡太多）、藥物影響。',a:'若同時情緒低落、對事情失去興趣，請盡早就醫。',m:'睡眠基本功（光線與作息）'},
+{ic:'😪',l:'白天疲倦、嗜睡',c:'睡眠不足、睡眠片段化、睡眠呼吸中止、鎮靜藥物與慢性疾病。',a:'若嗜睡到影響開車或工作，建議做睡眠評估，不要只靠咖啡因撐。',m:'身體不太舒服（打呼）、睡眠基本功'},
+{ic:'⚠️',l:'夜間出現異常動作',c:'快速動眼期行為障礙（夢中演出）、癲癇、週期性肢體抽動（PLMS）或藥物相關。',a:'夢中大叫揮拳、抽動或意識不清，需要特別警覺，建議盡快就醫（神經內科或睡眠中心）。',m:'常常做很多夢（留意夢中動作）'}];
+var trBox=document.getElementById('tr');
+TR.forEach(function(t){
+  var b=document.createElement('button');b.className='opt';b.setAttribute('aria-expanded','false');
+  b.innerHTML='<span class="ic">'+t.ic+'</span><span>'+esc(t.l)+'</span><span class="ck" style="visibility:visible">＋</span>';
+  var p=document.createElement('div');p.className='tr';
+  p.innerHTML='<p><b>可能原因：</b>'+esc(t.c)+'</p><p><b>可以怎麼做：</b>'+esc(t.a)+'</p><div class="src">下一頁可對照：'+esc(t.m)+'</div>';
+  b.onclick=function(){var o=p.classList.toggle('on');b.classList.toggle('sel',o);b.setAttribute('aria-expanded',String(o));b.lastChild.textContent=o?'－':'＋'};
+  trBox.appendChild(b);trBox.appendChild(p);
+});
+var G={1:'補氣養血、清心開竅',2:'養心安神、益氣生血',3:'調和陰陽、交通心腎',4:'健脾化痰、清利神志'};
+var GP={1:['三陰交','神門','百會','四神聰'],2:['神門','內關','足三里','三陰交'],3:['神門','內關','三陰交','太谿'],4:['豐隆','神門','內關','足三里']};
+var MAP={mind:1,dream:2,light:2,period:2,itch:2,heart:3,late:3,belly:4,nose:4,cough:4};
+var PTS={'神門':'腕橫紋小指側的凹陷','內關':'腕橫紋上約三指寬、兩條筋之間','三陰交':'內踝尖上約四指寬、脛骨後緣','足三里':'膝眼下約四指寬、脛骨外側一指','太谿':'內踝與腳跟筋之間的凹陷','百會':'頭頂正中','四神聰':'百會前後左右各約一個拇指寬','豐隆':'膝蓋與外踝連線中點、脛骨外側約兩指'};
+function personalize(keys,names){
+  document.getElementById('s3intro').textContent='依你選的「'+names.join('、')+'」，挑出與你最相關的基本功與穴位。';
+  document.querySelectorAll('#s3 details[data-for]').forEach(function(d){
+    var f=d.getAttribute('data-for').split(' ');
+    d.style.display=keys.some(function(k){return f.indexOf(k)>-1})?'':'none';
+  });
+  var first=null;
+  document.querySelectorAll('#s3 details').forEach(function(d){d.open=false;if(!first&&d.style.display!=='none')first=d});
+  if(first)first.open=true;
+  var gs=[],pts=[];
+  keys.forEach(function(k){var g=MAP[k];if(g&&gs.indexOf(g)<0)gs.push(g)});
+  gs.forEach(function(g){GP[g].forEach(function(p){if(pts.indexOf(p)<0)pts.push(p)})});
+  document.querySelectorAll('#s3 li[data-g]').forEach(function(li){li.style.display=gs.indexOf(+li.getAttribute('data-g'))>-1?'':'none'});
+  document.getElementById('acuWhy').textContent=keys.filter(function(k){return MAP[k]}).map(function(k){return D[k].label+' → '+G[MAP[k]]}).join('；');
+  document.getElementById('acuLoc').innerHTML='<b>位置速查：</b>'+pts.map(function(p){return esc(p)+'＝'+esc(PTS[p])}).join('；')+'。每穴按揉 1～2 分鐘，以微酸脹但不痛為度。';
+}
+</script>
+</body>
+</html>
